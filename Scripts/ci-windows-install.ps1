@@ -3,6 +3,9 @@ Write-Host "$(date) Start build script"-ForegroundColor green
 #Invoke-WebRequest "http://beta.unity3d.com/download/a122f5dc316d/Windows64EditorInstaller/UnitySetup64-2018.2.21f1.exe" -OutFile .\UnitySetup64.exe
 #Start-Process -FilePath ".\UnitySetup64.exe" -Wait -ArgumentList ('/S', '/Q')
 
+git clone git@github.com:microsoft/unitysetup.powershell.git
+cd unitysetup.powershell
+
 # See https://github.com/microsoft/unitysetup.powershell
 Install-Module UnitySetup -Scope CurrentUser
 

@@ -13,10 +13,10 @@ environment:
     secure: UnnV1zqSROyALS9r0TWfO0mAQXQWzZnauQsHuXdTa5M=
 
 install:
-  # Enable appveyor RDP
-  - appveyor DownloadFile https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-desktop.ps1
-  - ps: ./enable-desktop
-  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  # # Enable appveyor RDP
+  # - appveyor DownloadFile https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-desktop.ps1
+  # - ps: ./enable-desktop
+  # - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
   
   # # Enable secure-file and decrypt project
   # - ps: iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/appveyor/secure-file/master/install.ps1'))
