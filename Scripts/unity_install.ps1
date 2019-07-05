@@ -2,7 +2,8 @@ Configuration Unity_Install {
 
     param(
         [PSCredential]$UnityCredential,
-        [PSCredential]$UnitySerial
+        [String]$UnitySerial,
+        [String]$UnityVersion
     )
 
     Import-DscResource -ModuleName UnitySetup
@@ -10,7 +11,7 @@ Configuration Unity_Install {
     Node 'localhost' {
 
         xUnitySetupInstance Unity {
-            Versions   = '2018.2.21f1'
+            Versions   = $UnityVersion
             Components = 'Windows', 'Mac', 'Linux', 'UWP', 'iOS', 'Android'
             Ensure     = 'Present'
         }
@@ -20,7 +21,7 @@ Configuration Unity_Install {
             Credential = $UnityCredential
             Serial = $UnitySerial
             Ensure = 'Present'
-            UnityVersion = '2018.2.21f1'
+            UnityVersion = $UnityVersion
             DependsOn = '[xUnitySetupInstance]Unity'   
         }
     }

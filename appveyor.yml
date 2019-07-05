@@ -11,6 +11,7 @@ environment:
     secure: +xoa2OuKHUL78VpTC8CDJna8BXatVBGVSp/P59IKm5pZkzGLaFmS/YdCqOOOtbuB
   UNITY_SERIAL:
     secure: UnnV1zqSROyALS9r0TWfO0mAQXQWzZnauQsHuXdTa5M=
+  UNITY_VERSION: 2018.2.21f1
 
 install:
   # # Enable appveyor RDP
