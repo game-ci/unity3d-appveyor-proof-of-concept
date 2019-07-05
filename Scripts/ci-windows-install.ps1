@@ -14,7 +14,7 @@ $credentials = New-Object System.Management.Automation.PSCredential ($username, 
 
 $serial = $env:UNITY_SERIAL
 $secure_serial = ConvertTo-SecureString $serial -AsPlainText -Force
-$serial_credentials = New-Object System.Management.Automation.PSCredential $secure_serial
+$serial_credentials = New-Object System.Management.Automation.PSCredential ('', $secure_serial)
 
 $cd = @{
     AllNodes = @(
