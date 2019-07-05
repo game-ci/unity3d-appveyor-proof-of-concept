@@ -1,0 +1,47 @@
+version: '{build}'
+os: unstable
+platform: x64
+
+environment:
+  SECURE_FILE_SECRET:
+    secure: ZPfxdKqbUZezWCFOq9Oi6gU+1KXJ52NRavsdEMPd0jPzghgids0LRJyVDMGRavft3tdsMS+nuDanf29VxZDjrAnIe3wQ21ThbgExzuCUdCo=
+  UNITY_USERNAME:
+    secure: KZAUmDdRB8Eo/E1G0aZStPK8bLMNwlrfMKixAVF3Pek=
+  UNITY_PASSWORD:
+    secure: +xoa2OuKHUL78VpTC8CDJna8BXatVBGVSp/P59IKm5pZkzGLaFmS/YdCqOOOtbuB
+  UNITY_SERIAL:
+    secure: UnnV1zqSROyALS9r0TWfO0mAQXQWzZnauQsHuXdTa5M=
+
+install:
+  # Enable appveyor RDP
+  - appveyor DownloadFile https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-desktop.ps1
+  - ps: ./enable-desktop
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  
+  # # Enable secure-file and decrypt project
+  # - ps: iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/appveyor/secure-file/master/install.ps1'))
+  # - sh: ./appveyor-tools/secure-file -decrypt project.zip.enc -secret $SECURE_FILE_SECRET
+
+# Install unity and build the project
+build_script:
+  - ps: .\Scripts\ci-windows-install.ps1
+  - ps: .\Scripts\ci-windows-build.ps1
+  - 7z a artifact.zip ./
+
+# test_script:
+#   - ps: .\Scripts\ci-windows-test.ps1
+#   - ps: >
+#       $wc = New-Object 'System.Net.WebClient'
+#       $wc.UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)", "C:\projects\unity3d-encrypted-appveyor-poc\unit-test-results.xml")
+
+deploy: off
+
+#cache:
+#  - C:\Program Files\Unity\ -> appveyor.yml
+
+# on_finish:
+#   - sh: ./appveyor-tools/secure-file -encrypt artifact.zip -out artifact.zip.enc -secret $SECURE_FILE_SECRET
+#   - appveyor PushArtifact artifact.zip.enc
+
+on_finish:
+  - appveyor PushArtifact artifact.zip
