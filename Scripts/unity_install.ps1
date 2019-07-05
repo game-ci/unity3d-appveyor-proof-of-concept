@@ -2,14 +2,14 @@ Configuration Unity_Install {
 
     param(
         [PSCredential]$UnityCredential,
-        [String]$UnitySerial,
-        [String]$UnityVersion
+        [PSCredential]$UnitySerial,
+        [String]$UnityVersion,
+        [string[]]$ComputerName = $ENV:ComputerName
     )
 
     Import-DscResource -ModuleName UnitySetup
 
-    Node 'localhost' {
-
+    Node $ComputerName {
         xUnitySetupInstance Unity {
             Versions   = $UnityVersion
             Components = 'Windows', 'Mac', 'Linux', 'UWP', 'iOS', 'Android'
