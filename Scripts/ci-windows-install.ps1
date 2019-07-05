@@ -5,6 +5,8 @@ Write-Host "$(date) Start build script"-ForegroundColor green
 
 Install-Module -Name UnitySetup -RequiredVersion 5.0.105
 
+$unity_version = $env:UNITY_VERSION
+
 $username = $env:UNITY_USERNAME
 $password = $env:UNITY_PASSWORD
 
@@ -15,6 +17,9 @@ $credentials = New-Object System.Management.Automation.PSCredential ($username, 
 $serial = $env:UNITY_SERIAL
 $secure_serial = ConvertTo-SecureString $serial -AsPlainText -Force
 $serial_credentials = New-Object System.Management.Automation.PSCredential ($username, $secure_serial)
+
+Write-Host "$(date) Installing Unity"-ForegroundColor green
+Find-UnitySetupInstaller -Version $unity_version -Components 'Windows','Linux','UWP'| Install-UnitySetupInstance
 
 $cd = @{
     AllNodes = @(
@@ -28,6 +33,8 @@ $cd = @{
 
 . .\Scripts\Install_Unity.ps1
 
-Unity_Install -ConfigurationData $cd -UnityCredential $credentials -UnitySerial $serial_credentials -UnityVersion $env:UNITY_VERSION
+Write-Host "$(date) Running DSC configuration"-ForegroundColor green
+
+Unity_Install -ConfigurationData $cd -UnityCredential $credentials -UnitySerial $serial_credentials -UnityVersion 
 
 Write-Host "$(date) Unity Installed"-ForegroundColor green

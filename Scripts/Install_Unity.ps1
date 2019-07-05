@@ -12,7 +12,7 @@ Configuration Unity_Install {
 
         xUnitySetupInstance Unity {
             Versions   = $UnityVersion
-            Components = 'Windows', 'Mac', 'Linux', 'UWP', 'iOS', 'Android'
+            Components = 'Windows', 'Linux', 'UWP'
             Ensure     = 'Present'
         }
 
