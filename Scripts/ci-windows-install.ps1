@@ -16,7 +16,16 @@ $serial = $env:UNITY_SERIAL
 $secure_serial = ConvertTo-SecureString $serial -AsPlainText -Force
 $serial_credentials = New-Object System.Management.Automation.PSCredential $secure_serial
 
+$cd = @{
+    AllNodes = @(
+        @{
+            NodeName = 'localhost'
+            PSDscAllowDomainUser = $true
+            PSDscAllowPlainTextPassword = $true
+        }
+    )
+}
 . .\Scripts\Unity_Install.ps1
-Unity_Install -UnityCredential $credentials -UnitySerial $serial_credentials -UnityVersion $env:UNITY_VERSION -COMPUTERNAME $env:COMPUTERNAME
+Unity_Install -UnityCredential $credentials -UnitySerial $serial_credentials -UnityVersion $env:UNITY_VERSION
 
 Write-Host "$(date) Unity Installed"-ForegroundColor green

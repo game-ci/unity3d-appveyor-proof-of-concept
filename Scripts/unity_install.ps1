@@ -3,13 +3,12 @@ Configuration Unity_Install {
     param(
         [PSCredential]$UnityCredential,
         [PSCredential]$UnitySerial,
-        [String]$UnityVersion,
-        [string[]]$ComputerName = $ENV:ComputerName
+        [String]$UnityVersion
     )
 
     Import-DscResource -ModuleName UnitySetup
 
-    Node $ComputerName {
+    Node 'localhost' {
 
         PSDscAllowDomainUser = $true
         PSDscAllowPlainTextPassword = $true
