@@ -13,8 +13,10 @@ $secure_password = ConvertTo-SecureString $password -AsPlainText -Force
 $credentials = New-Object System.Management.Automation.PSCredential ($username, $secure_password)
 
 $serial = $env:UNITY_SERIAL
+$secure_serial = ConvertTo-SecureString $serial -AsPlainText -Force
+$serial_credentials = New-Object System.Management.Automation.PSCredential $secure_serial
 
 . .\Scripts\Unity_Install.ps1
-Unity_Install -UnityCredential $credentials -UnitySerial $serial -UnityVersion $env:UNITY_VERSION
+Unity_Install -UnityCredential $credentials -UnitySerial $serial_credentials -UnityVersion $env:UNITY_VERSION
 
 Write-Host "$(date) Unity Installed"-ForegroundColor green
