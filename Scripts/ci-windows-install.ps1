@@ -14,7 +14,7 @@ $credentials = New-Object System.Management.Automation.PSCredential ($username, 
 
 $serial = $env:UNITY_SERIAL
 
-. .\Unity_Install.ps1
+. .\Scripts\Unity_Install.ps1
 Unity_Install -UnityCredential $username $password -UnitySerial $serial
 
 Write-Host "$(date) Unity Installed"-ForegroundColor green
