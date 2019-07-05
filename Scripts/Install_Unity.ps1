@@ -10,9 +10,6 @@ Configuration Unity_Install {
 
     Node 'localhost' {
 
-        PSDscAllowDomainUser = $true
-        PSDscAllowPlainTextPassword = $true
-
         xUnitySetupInstance Unity {
             Versions   = $UnityVersion
             Components = 'Windows', 'Mac', 'Linux', 'UWP', 'iOS', 'Android'
