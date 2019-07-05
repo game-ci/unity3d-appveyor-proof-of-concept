@@ -1,5 +1,7 @@
 Write-Host "$(date) Start build script"-ForegroundColor green
 
+Get-UnitySetupInstance
+
 Write-Host "$(date) Setting the right unity instance"-ForegroundColor green
 Get-UnitySetupInstance | Select-UnitySetupInstance -Latest
 
