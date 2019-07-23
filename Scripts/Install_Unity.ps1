@@ -1,4 +1,4 @@
-Configuration Unity_Install {
+Configuration Install_Unity {
 
     param(
         [PSCredential]$UnityCredential,

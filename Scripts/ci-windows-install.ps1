@@ -1,8 +1,5 @@
 Write-Host "$(date) Start build script"-ForegroundColor green
 
-#Invoke-WebRequest "http://beta.unity3d.com/download/a122f5dc316d/Windows64EditorInstaller/UnitySetup64-2018.2.21f1.exe" -OutFile .\UnitySetup64.exe
-#Start-Process -FilePath ".\UnitySetup64.exe" -Wait -ArgumentList ('/S', '/Q')
-
 Install-Module -Name UnitySetup -RequiredVersion 5.0.105
 
 $unity_version = $env:UNITY_VERSION
@@ -35,6 +32,6 @@ $cd = @{
 
 Write-Host "$(date) Running DSC configuration"-ForegroundColor green
 
-Unity_Install -ConfigurationData $cd -UnityCredential $credentials -UnitySerial $serial_credentials -UnityVersion 
+Install_Unity -ConfigurationData $cd -UnityCredential $credentials -UnitySerial $serial_credentials -UnityVersion 
 
 Write-Host "$(date) Unity Installed"-ForegroundColor green
