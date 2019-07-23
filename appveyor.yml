@@ -26,8 +26,8 @@ install:
   # Install unity
   - ps: .\Scripts\ci-windows-install.ps1
 
-cache:
-  - C:\Program Files\Unity.2018.2.21f1\ -> .\Scripts\ci-windows-install.ps1
+# cache:
+#   - C:\Program Files\Unity.2018.2.21f1\ -> .\Scripts\ci-windows-install.ps1
 
 # build the unity project
 build_script:
