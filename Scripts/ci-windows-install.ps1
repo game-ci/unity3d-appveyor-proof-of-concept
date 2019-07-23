@@ -34,7 +34,5 @@ $cd = @{
 . .\Scripts\Install_Unity.ps1
 
 Write-Host "$(date) Running DSC configuration"-ForegroundColor green
-
 Install_Unity -ConfigurationData $cd -UnityCredential $credentials -UnitySerial $serial_credentials -UnityVersion $unity_version
-
 Write-Host "$(date) Installed Unity version $unity_version"-ForegroundColor green

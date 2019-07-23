@@ -22,10 +22,15 @@ install:
   # # Enable secure-file and decrypt project
   # - ps: iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/appveyor/secure-file/master/install.ps1'))
   # - sh: ./appveyor-tools/secure-file -decrypt project.zip.enc -secret $SECURE_FILE_SECRET
-
-# Install unity and build the project
-build_script:
+  
+  # Install unity
   - ps: .\Scripts\ci-windows-install.ps1
+
+cache:
+  - C:\Program Files\Unity.2018.2.21f1\ -> .\Scripts\ci-windows-install.ps1
+
+# build the unity project
+build_script:
   - ps: .\Scripts\ci-windows-build.ps1
   - 7z a artifact.zip ./
 
@@ -46,3 +51,4 @@ deploy: off
 
 on_finish:
   - appveyor PushArtifact artifact.zip
+  - ps: .\Scripts\ci-windows-return-license.ps1
