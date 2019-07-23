@@ -3,7 +3,7 @@ Configuration Unity_Install {
     param(
         [PSCredential]$UnityCredential,
         [PSCredential]$UnitySerial,
-        [String]$UnityVersion
+        [System.String]$UnityVersion
     )
 
     Import-DscResource -ModuleName UnitySetup
