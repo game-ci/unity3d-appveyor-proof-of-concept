@@ -1,3 +1,6 @@
+# Stop PowerShell on first error
+$ErrorActionPreference = "Stop"
+
 Write-Host "$(date) Start build script"-ForegroundColor green
 
 Get-UnitySetupInstance

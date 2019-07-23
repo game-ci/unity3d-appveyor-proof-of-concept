@@ -32,6 +32,6 @@ $cd = @{
 
 Write-Host "$(date) Running DSC configuration"-ForegroundColor green
 
-Install_Unity -ConfigurationData $cd -UnityCredential $credentials -UnitySerial $serial_credentials -UnityVersion 
+Install_Unity -ConfigurationData $cd -UnityCredential $credentials -UnitySerial $serial_credentials -UnityVersion $unity_version
 
-Write-Host "$(date) Unity Installed"-ForegroundColor green
+Write-Host "$(date) Installed Unity version $unity_version"-ForegroundColor green
