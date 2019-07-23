@@ -1,3 +1,6 @@
+# Stop PowerShell on first error
+$ErrorActionPreference = "Stop"
+
 Write-Host "$(date) Start build script"-ForegroundColor green
 
 Install-Module -Name UnitySetup -RequiredVersion 5.0.105
@@ -15,7 +18,7 @@ $serial = $env:UNITY_SERIAL
 $secure_serial = ConvertTo-SecureString $serial -AsPlainText -Force
 $serial_credentials = New-Object System.Management.Automation.PSCredential ($username, $secure_serial)
 
-Write-Host "$(date) Installing Unity"-ForegroundColor green
+Write-Host "$(date) Installing Unity version $unity_version"-ForegroundColor green
 Find-UnitySetupInstaller -Version $unity_version -Components 'Windows','Linux','UWP'| Install-UnitySetupInstance
 
 $cd = @{
