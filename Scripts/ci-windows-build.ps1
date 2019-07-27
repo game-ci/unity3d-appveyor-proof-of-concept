@@ -16,14 +16,26 @@ $credentials = New-Object System.Management.Automation.PSCredential ($username, 
 
 $secure_serial = ConvertTo-SecureString $serial -AsPlainText -Force
 
+$build_target = 'StandaloneWindows64'
+#$build_target = 'WSAPlayer' # TODO: UWP
+$build_name = 'ExampleProjectName'
+$build_path = "./Builds/$build_target/"
+
+New-Item -Path $build_path -ItemType "directory"
+
 Write-Host "$(date) Starting unity editor with method execution"-ForegroundColor green
 Start-UnityEditor `
   -Credential $credentials `
   -Serial $secure_serial `
-  -ExecuteMethod BuildCommand.PerformBuild `
   -BatchMode `
   -Quit `
   -LogFile .\build.log `
+  -ExecuteMethod BuildCommand.PerformBuild `
+  -buildTarget $build_target `
+  -customBuildTarget $build_target `
+  -customBuildName $build_name `
+  -customBuildPath $build_path `
+  -customBuildOptions AcceptExternalModificationsToPlayer `
   -Wait # -AdditionalArguments "-BuildArg1 -BuildArg2"
 
 Write-Host "$(date) Reading build logs"-ForegroundColor green
