@@ -32,11 +32,14 @@ Start-UnityEditor `
   -LogFile .\build.log `
   -ExecuteMethod BuildCommand.PerformBuild `
   -buildTarget $build_target `
-  -customBuildTarget $build_target `
-  -customBuildName $build_name `
-  -customBuildPath $build_path `
-  -customBuildOptions AcceptExternalModificationsToPlayer `
-  -Wait # -AdditionalArguments "-BuildArg1 -BuildArg2"
+  -Wait `
+  -AdditionalArguments
+  "
+    -customBuildTarget $build_target
+    -customBuildName $build_name
+    -customBuildPath $build_path
+    -customBuildOptions AcceptExternalModificationsToPlayer
+  "
 
 Write-Host "$(date) Reading build logs"-ForegroundColor green
 Get-Content -Path .\build.log
