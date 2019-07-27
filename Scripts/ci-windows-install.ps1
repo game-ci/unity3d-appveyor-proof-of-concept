@@ -15,25 +15,7 @@ $password = $env:UNITY_PASSWORD
 $secure_password = ConvertTo-SecureString $password -AsPlainText -Force
 $credentials = New-Object System.Management.Automation.PSCredential ($username, $secure_password)
 
-$serial = $env:UNITY_SERIAL
-$secure_serial = ConvertTo-SecureString $serial -AsPlainText -Force
-$serial_credentials = New-Object System.Management.Automation.PSCredential ($username, $secure_serial)
-
 Write-Host "$(date) Installing Unity version $unity_version with components $unity_components"-ForegroundColor green
 Find-UnitySetupInstaller -Version $unity_version -Components $unity_components| Install-UnitySetupInstance
 
-$cd = @{
-    AllNodes = @(
-        @{
-            NodeName = 'localhost'
-            PSDscAllowDomainUser = $true
-            PSDscAllowPlainTextPassword = $true
-        }
-    )
-}
-
-. .\Scripts\Install_Unity.ps1
-
-Write-Host "$(date) Running DSC configuration"-ForegroundColor green
-Install_Unity -ConfigurationData $cd -UnityCredential $credentials -UnitySerial $serial_credentials -UnityVersion $unity_version
 Write-Host "$(date) Installed Unity version $unity_version"-ForegroundColor green
