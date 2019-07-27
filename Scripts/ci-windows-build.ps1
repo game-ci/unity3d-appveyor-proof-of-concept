@@ -15,10 +15,16 @@ $secure_password = ConvertTo-SecureString $password -AsPlainText -Force
 $credentials = New-Object System.Management.Automation.PSCredential ($username, $secure_password)
 
 $secure_serial = ConvertTo-SecureString $serial -AsPlainText -Force
-$serial_credentials = New-Object System.Management.Automation.PSCredential ('ignored', $secure_serial)
 
 Write-Host "$(date) Starting unity editor with method execution"-ForegroundColor green
-Start-UnityEditor -Credential $credentials -Serial $serial_credentials -ExecuteMethod Build.Invoke -BatchMode -Quit -LogFile .\build.log -Wait # -AdditionalArguments "-BuildArg1 -BuildArg2"
+Start-UnityEditor `
+  -Credential $credentials `
+  -Serial $secure_serial `
+  -ExecuteMethod BuildCommand.PerformBuild `
+  -BatchMode `
+  -Quit `
+  -LogFile .\build.log `
+  -Wait # -AdditionalArguments "-BuildArg1 -BuildArg2"
 
 Write-Host "$(date) Reading build logs"-ForegroundColor green
 Get-Content -Path .\build.log
