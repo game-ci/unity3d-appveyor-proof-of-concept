@@ -18,11 +18,11 @@ install:
   # - appveyor DownloadFile https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-desktop.ps1
   # - ps: ./enable-desktop
   # - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
-  
+
   # # Enable secure-file and decrypt project
   # - ps: iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/appveyor/secure-file/master/install.ps1'))
   # - sh: ./appveyor-tools/secure-file -decrypt project.zip.enc -secret $SECURE_FILE_SECRET
-  
+
   # Install unity
   - ps: .\Scripts\ci-windows-install.ps1
 
@@ -32,6 +32,7 @@ install:
 # build the unity project
 build_script:
   - ps: .\Scripts\ci-windows-build.ps1
+  - ps: .\Scripts\ci-windows-build-generated-vsproject.ps1
   - 7z a artifact.zip ./
 
 # test_script:
