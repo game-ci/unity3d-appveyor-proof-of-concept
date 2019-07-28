@@ -3,7 +3,7 @@ $ErrorActionPreference = "Stop"
 
 Write-Host "$(date) Start build script"-ForegroundColor green
 
-Install-Module -Name UnitySetup -RequiredVersion 5.0.105
+Install-Module -Name UnitySetup -RequiredVersion 5.1.126
 
 $unity_version = $env:UNITY_VERSION
 $unity_components = 'Windows','Linux','UWP'
