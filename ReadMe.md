@@ -2,7 +2,7 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/kg8s04110g6ddj5y?svg=true)](https://ci.appveyor.com/project/GabLeRoux/unity3d-encrypted-appveyor-poc)
 
-This is a proof of concept for using [Microsoft's Unity Setup Powershell Module](https://github.com/microsoft/unitysetup.powershell) to install and run [Unity](https://unity.com) in [Appveyor CI](https://www.appveyor.com) to build and test a Unity project :tada:
+This is a proof of concept for using [Microsoft's Unity Setup Powershell Module](https://github.com/microsoft/unitysetup.powershell) to install and run [Unity](https://unity.com) in [Appveyor CI](https://www.appveyor.com) to build and test a Unity project :metal:
 
 This project is very similar to what I already did with gitlab-ci:
 
