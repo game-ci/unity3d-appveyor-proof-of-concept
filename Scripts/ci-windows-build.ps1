@@ -16,8 +16,8 @@ $credentials = New-Object System.Management.Automation.PSCredential ($username, 
 
 $secure_serial = ConvertTo-SecureString $serial -AsPlainText -Force
 
-$build_target = 'StandaloneWindows64'
-#$build_target = 'WSAPlayer' # TODO: UWP
+#$build_target = 'StandaloneWindows64'
+$build_target = 'WSAPlayer'
 $build_name = 'ExampleProjectName'
 $build_path = "./Builds/$build_target/"
 
