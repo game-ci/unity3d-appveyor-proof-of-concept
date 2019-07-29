@@ -1,7 +1,7 @@
 # Stop PowerShell on first error
 $ErrorActionPreference = "Stop"
 
-Write-Host "$(date) Start build script"-ForegroundColor green
+Write-Host "$(date) Starting install script"-ForegroundColor green
 
 Install-Module -Name UnitySetup -RequiredVersion 5.1.126
 

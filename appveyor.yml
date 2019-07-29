@@ -26,6 +26,7 @@ install:
   # Install unity
   - ps: .\Scripts\ci-windows-install.ps1
 
+# TODO: try this
 # cache:
 #   - C:\Program Files\Unity.2018.2.21f1\ -> .\Scripts\ci-windows-install.ps1
 
@@ -33,7 +34,11 @@ install:
 build_script:
   - ps: .\Scripts\ci-windows-build.ps1
   - ps: .\Scripts\ci-windows-build-generated-vsproject.ps1
-  - 7z a artifact.zip ./
+#  - 7z a Root.zip ./
+  - 7z a Builds.zip ./Builds
+  # TODO: make use of variables here for WSAPlayer and ExampleProjectName, check if it's possible to use environment with 7z command maybe?
+  - 7z a Release.zip ./Builds/WSAPlayer/ExampleProjectName/build/bin/Win32/Release
+  - 7z a AppxPackages.zip ./Builds/WSAPlayer/ExampleProjectName/AppxPackages
 
 # test_script:
 #   - ps: .\Scripts\ci-windows-test.ps1
@@ -51,5 +56,9 @@ deploy: off
 #   - appveyor PushArtifact artifact.zip.enc
 
 on_finish:
-  - appveyor PushArtifact artifact.zip
+#  - appveyor PushArtifact Root.zip
+  - appveyor PushArtifact Build.log
+  - appveyor PushArtifact Builds.zip
+  - appveyor PushArtifact Release.zip
+  - appveyor PushArtifact AppxPackages.zip
   - ps: .\Scripts\ci-windows-return-license.ps1
