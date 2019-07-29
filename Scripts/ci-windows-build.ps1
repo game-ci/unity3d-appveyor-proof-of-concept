@@ -1,16 +1,15 @@
 # Stop PowerShell on first error
 $ErrorActionPreference = "Stop"
 
-Write-Host "$(date) Start build script"-ForegroundColor green
+Write-Host "$(date) Starting build script"-ForegroundColor green
+Write-Host "$(date) Getting unity instance"-ForegroundColor green
 Get-UnitySetupInstance
-
-Write-Host "$(date) Setting the right unity instance"-ForegroundColor green
 
 $username = $env:UNITY_USERNAME
 $password = $env:UNITY_PASSWORD
 $serial = $env:UNITY_SERIAL
 
-# Create non-interactive credential object as explained here: https://blogs.msdn.microsoft.com/koteshb/2010/02/12/powershell-how-to-create-a-pscredential-object/
+Write-Host "$(date) Creating non-interactive credential object for password"-ForegroundColor green
 $secure_password = ConvertTo-SecureString $password -AsPlainText -Force
 $credentials = New-Object System.Management.Automation.PSCredential ($username, $secure_password)
 
@@ -34,10 +33,9 @@ Start-UnityEditor `
   -buildTarget $build_target `
   -Wait `
   -AdditionalArguments "-customBuildTarget $build_target -customBuildName $build_name -customBuildPath $build_path -customBuildOptions AcceptExternalModificationsToPlayer"
+# TODO: Try with free version too '-ForceFree `'
 
 Write-Host "$(date) Reading build logs"-ForegroundColor green
 Get-Content -Path .\build.log
 
-# TODO: Try with free version too
-#Start-UnityEditor -Credential $credentials -ForceFree -ExecuteMethod Build.Invoke -BatchMode -Quit -LogFile .\build.log -Wait # -AdditionalArguments "-BuildArg1 -BuildArg2"
-Write-Host "$(date) Done with build. Output log saved to build.log"-ForegroundColor green
+Write-Host "$(date) Done with unity build. Output log saved to build.log"-ForegroundColor green
