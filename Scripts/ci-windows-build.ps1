@@ -4,7 +4,7 @@ $ErrorActionPreference = "Stop"
 Write-Host "$(date) Starting build script"-ForegroundColor green
 Write-Host "$(date) Getting unity instance"-ForegroundColor green
 Get-UnitySetupInstance
-s
+
 $username = $env:UNITY_USERNAME
 $password = $env:UNITY_PASSWORD
 $serial = $env:UNITY_SERIAL
