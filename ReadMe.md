@@ -22,7 +22,7 @@ Once I get [UWP working](https://github.com/GabLeRoux/unity3d-encrypted-appveyor
 
 ## Want to get in touch?
 
-Reach me on [Totema Studio's discord server](https://totema.studio/discord), there's a `#technical-english` channel :+1:
+Come say hi on [Unity-CI's discord server](https://unity-ci.com/discord)
 
 ## License
 
