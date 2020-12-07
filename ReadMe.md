@@ -24,7 +24,7 @@ Once I get [UWP working](https://github.com/GabLeRoux/unity3d-encrypted-appveyor
 
 ## Want to get in touch?
 
-Come say hi on [Unity-CI's discord server](https://game.ci/discord)
+Come say hi on [GameCI's discord server](https://game.ci/discord)
 
 ## License
 
