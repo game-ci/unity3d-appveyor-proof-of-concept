@@ -9,6 +9,8 @@ This project is very similar to what I already did with gitlab-ci:
 * https://gitlab.com/gableroux/unity3d-gitlab-ci-example
 * https://gitlab.com/gableroux/unity3d
 
+More details on [game.ci](https://game.ci)
+
 ## Project status
 
 It's actually working! :tada:
@@ -22,7 +24,7 @@ Once I get [UWP working](https://github.com/GabLeRoux/unity3d-encrypted-appveyor
 
 ## Want to get in touch?
 
-Come say hi on [Unity-CI's discord server](https://unity-ci.com/discord)
+Come say hi on [Unity-CI's discord server](https://game.ci/discord)
 
 ## License
 
