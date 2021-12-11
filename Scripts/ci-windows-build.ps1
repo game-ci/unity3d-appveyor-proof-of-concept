@@ -1,25 +1,25 @@
 # Stop PowerShell on first error
 $ErrorActionPreference = "Stop"
 
-Write-Host "$(date) Start build script"-ForegroundColor green
+Write-Host "$(date) Starting build script"-ForegroundColor green
+Write-Host "$(date) Getting unity instance"-ForegroundColor green
 Get-UnitySetupInstance
-
-Write-Host "$(date) Setting the right unity instance"-ForegroundColor green
 
 $username = $env:UNITY_USERNAME
 $password = $env:UNITY_PASSWORD
 $serial = $env:UNITY_SERIAL
 
-# Create non-interactive credential object as explained here: https://blogs.msdn.microsoft.com/koteshb/2010/02/12/powershell-how-to-create-a-pscredential-object/
+Write-Host "$(date) Creating non-interactive credential object for password"-ForegroundColor green
 $secure_password = ConvertTo-SecureString $password -AsPlainText -Force
 $credentials = New-Object System.Management.Automation.PSCredential ($username, $secure_password)
 
 $secure_serial = ConvertTo-SecureString $serial -AsPlainText -Force
 
-$build_target = 'StandaloneWindows64'
-#$build_target = 'WSAPlayer' # TODO: UWP
+#$build_target = 'StandaloneWindows64'
+$build_target = 'WSAPlayer'
 $build_name = 'ExampleProjectName'
 $build_path = "./Builds/$build_target/"
+$build_log = ".\build.log"
 
 New-Item -Path $build_path -ItemType "directory"
 
@@ -29,15 +29,14 @@ Start-UnityEditor `
   -Serial $secure_serial `
   -BatchMode `
   -Quit `
-  -LogFile .\build.log `
+  -LogFile $build_log `
   -ExecuteMethod BuildCommand.PerformBuild `
   -buildTarget $build_target `
   -Wait `
   -AdditionalArguments "-customBuildTarget $build_target -customBuildName $build_name -customBuildPath $build_path -customBuildOptions AcceptExternalModificationsToPlayer"
+# TODO: Try with free version too '-ForceFree `'
 
 Write-Host "$(date) Reading build logs"-ForegroundColor green
-Get-Content -Path .\build.log
+Get-Content -Path $build_log
 
-# TODO: Try with free version too
-#Start-UnityEditor -Credential $credentials -ForceFree -ExecuteMethod Build.Invoke -BatchMode -Quit -LogFile .\build.log -Wait # -AdditionalArguments "-BuildArg1 -BuildArg2"
-Write-Host "$(date) Done with build. Output log saved to build.log"-ForegroundColor green
+Write-Host "$(date) Done with unity build. Output log saved to $build_log"-ForegroundColor green

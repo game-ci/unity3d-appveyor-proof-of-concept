@@ -18,21 +18,27 @@ install:
   # - appveyor DownloadFile https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-desktop.ps1
   # - ps: ./enable-desktop
   # - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
-  
+
   # # Enable secure-file and decrypt project
   # - ps: iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/appveyor/secure-file/master/install.ps1'))
   # - sh: ./appveyor-tools/secure-file -decrypt project.zip.enc -secret $SECURE_FILE_SECRET
-  
+
   # Install unity
   - ps: .\Scripts\ci-windows-install.ps1
 
+# TODO: try this
 # cache:
 #   - C:\Program Files\Unity.2018.2.21f1\ -> .\Scripts\ci-windows-install.ps1
 
 # build the unity project
 build_script:
   - ps: .\Scripts\ci-windows-build.ps1
-  - 7z a artifact.zip ./
+  - ps: .\Scripts\ci-windows-build-generated-vsproject.ps1
+#  - 7z a Root.zip ./
+  - 7z a Builds.zip ./Builds
+  # TODO: make use of variables here for WSAPlayer and ExampleProjectName, check if it's possible to use environment with 7z command maybe?
+  - 7z a Release.zip ./Builds/WSAPlayer/ExampleProjectName/build/bin/Win32/Release
+  - 7z a AppxPackages.zip ./Builds/WSAPlayer/ExampleProjectName/AppxPackages
 
 # test_script:
 #   - ps: .\Scripts\ci-windows-test.ps1
@@ -50,5 +56,9 @@ deploy: off
 #   - appveyor PushArtifact artifact.zip.enc
 
 on_finish:
-  - appveyor PushArtifact artifact.zip
+#  - appveyor PushArtifact Root.zip
+  - appveyor PushArtifact Build.log
+  - appveyor PushArtifact Builds.zip
+  - appveyor PushArtifact Release.zip
+  - appveyor PushArtifact AppxPackages.zip
   - ps: .\Scripts\ci-windows-return-license.ps1
